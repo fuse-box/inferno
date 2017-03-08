@@ -7,12 +7,12 @@ import _VNodeFlags from 'inferno-vnode-flags';
 import { EMPTY_OBJ } from './DOM/utils';
 
 if (process.env.NODE_ENV !== 'production') {
-	const testFunc = function testFn() {};
+	const testFunc = function testFn() { };
 	if ((testFunc.name || testFunc.toString()).indexOf('testFn') === -1) {
 		warning(('It looks like you\'re using a minified copy of the development build ' +
-				'of Inferno. When deploying Inferno apps to production, make sure to use ' +
-				'the production build which skips development warnings and is faster. ' +
-				'See http://infernojs.org for more details.'
+			'of Inferno. When deploying Inferno apps to production, make sure to use ' +
+			'the production build which skips development warnings and is faster. ' +
+			'See http://infernojs.org for more details.'
 		));
 	}
 }

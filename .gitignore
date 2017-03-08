@@ -18,6 +18,8 @@ node_modules
 .DS_Store
 *.map
 *.log
+.fusebox
+fuse.bundle.js
 *.swp
 *~
 test/data/result.json
