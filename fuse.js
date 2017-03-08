@@ -1,10 +1,21 @@
-const { FuseBox, TypeScriptHelpers, ReplacePlugin } = require("fsbx");
+const { FuseBox, UglifyJSPlugin, ReplacePlugin } = require("fsbx");
+
+const isProd = process.argv.indexOf("--production") > -1;
+
 const fuse = FuseBox.init({
     src: "packages",
-    outFile: "bundle.inferno.js",
+    outFile: "inferno.fused.js",
     plugins: [
-        ReplacePlugin({ "process.env.NODE_ENV": JSON.stringify("production") })
+        ReplacePlugin({ "process.env.NODE_ENV": JSON.stringify("production") }),
+        isProd && UglifyJSPlugin()
     ],
+    rollup: {
+        bundle: {
+            moduleName: "Inferno"
+        },
+        entry: `packages/inferno/src/index.js`
+    },
+    debug: true,
     alias: { // this can be automatically assigned
         "inferno-compat": "~/packages/inferno-compat",
         "inferno-component": "~/packages/inferno-component/dist-es",
@@ -20,9 +31,4 @@ const fuse = FuseBox.init({
     }
 });
 
-fuse.bundle(`packages/inferno/src/index.ts`).then(bundle => {
-    return fuse.rollup(bundle.content, {
-        entry: `packages/inferno/src/index.js`,
-        outFile: "fusebox.dope.rollup.js"
-    });
-})
+fuse.bundle(`packages/inferno/src/index.ts`);

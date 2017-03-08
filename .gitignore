@@ -19,6 +19,8 @@ node_modules
 *.map
 *.log
 .fusebox/*
+inferno.fused.js
+inferno.fused.min.js
 fuse.bundle.js
 *.swp
 *~
